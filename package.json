@@ -1,0 +1,103 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "react-native-radio-buttons@^1.0.0",
+        "scope": null,
+        "escapedName": "react-native-radio-buttons",
+        "name": "react-native-radio-buttons",
+        "rawSpec": "^1.0.0",
+        "spec": ">=1.0.0 <2.0.0",
+        "type": "range"
+      },
+      "D:\\proyekreact\\panggilTukangv2\\panggiltukang-customer-reactnative"
+    ]
+  ],
+  "_from": "react-native-radio-buttons@>=1.0.0 <2.0.0",
+  "_id": "react-native-radio-buttons@1.0.0",
+  "_inCache": true,
+  "_location": "/react-native-radio-buttons",
+  "_nodeVersion": "8.1.2",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-radio-buttons-1.0.0.tgz_1500455721284_0.2696147921960801"
+  },
+  "_npmUser": {
+    "name": "arnaudrinquin",
+    "email": "rinquin.arnaud@gmail.com"
+  },
+  "_npmVersion": "5.0.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-radio-buttons@^1.0.0",
+    "scope": null,
+    "escapedName": "react-native-radio-buttons",
+    "name": "react-native-radio-buttons",
+    "rawSpec": "^1.0.0",
+    "spec": ">=1.0.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-radio-buttons/-/react-native-radio-buttons-1.0.0.tgz",
+  "_shasum": "be828b85897f80ca66ad66ad7adedb6b1890ab9d",
+  "_shrinkwrap": null,
+  "_spec": "react-native-radio-buttons@^1.0.0",
+  "_where": "D:\\proyekreact\\panggilTukangv2\\panggiltukang-customer-reactnative",
+  "author": {
+    "name": "Arnaud Rinquin",
+    "email": "rinquin.arnaud@gmail.com",
+    "url": "http://github.com/ArnaudRinquin"
+  },
+  "bugs": {
+    "url": "https://github.com/ArnaudRinquin/react-native-radio-buttons/issues"
+  },
+  "dependencies": {},
+  "description": "A react component to implement custom radio buttons-like behaviors: multiple options, only on can be selected at once.",
+  "devDependencies": {},
+  "directories": {
+    "example": "examples"
+  },
+  "dist": {
+    "integrity": "sha512-9qglzqVfpFXph2aeRvpg7obDhb8X8LBexMRugXSjud7+2J1teDMsWyypE8PLbF+WCXoCCtW0K+RpHOuzv7kJjA==",
+    "shasum": "be828b85897f80ca66ad66ad7adedb6b1890ab9d",
+    "tarball": "https://registry.npmjs.org/react-native-radio-buttons/-/react-native-radio-buttons-1.0.0.tgz"
+  },
+  "gitHead": "e429b0376f9637b5b765340e70c26dd577cba797",
+  "homepage": "https://github.com/ArnaudRinquin/react-native-radio-buttons#readme",
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "radio-buttons",
+    "radio",
+    "segmentedcontrols",
+    "segmented-controls"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "maintainers": [
+    {
+      "name": "arnaudrinquin",
+      "email": "rinquin.arnaud@gmail.com"
+    }
+  ],
+  "name": "react-native-radio-buttons",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "prop-types": ">=15.5.0",
+    "react-native": ">=0.25.0"
+  },
+  "readme": "# react-native-radio-buttons\n\nA react component to implement _radio buttons_-like behaviors: multiple options, only one option can be selected at a given time.\n\nBoth the container and option nodes are customizable. Comes with SegmentedControls clone, only more customizable (see below, animations to come).\n\n![example](./images/example.png)\n\n## Install\n\n```sh\nnpm i -S react-native-radio-buttons\n```\n\n## Demo app\n\n```sh\ngit clone git@github.com:ArnaudRinquin/react-native-radio-buttons.git\ncd react-native-radio-buttons\nnpm run demo\n```\n\n## Usage\n\nHere is an extensive overview of the component usage.\n\n```jsx\nimport { RadioButtons } from 'react-native-radio-buttons'\n\n// ...\n\nrender() {\n  const options = [\n    \"Option 1\",\n    \"Option 2\"\n  ];\n\n  function setSelectedOption(selectedOption){\n    this.setState({\n      selectedOption\n    });\n  }\n\n  function renderOption(option, selected, onSelect, index){\n    const style = selected ? { fontWeight: 'bold'} : {};\n\n    return (\n      <TouchableWithoutFeedback onPress={onSelect} key={index}>\n        <Text style={style}>{option}</Text>\n      </TouchableWithoutFeedback>\n    );\n  }\n\n  function renderContainer(optionNodes){\n    return <View>{optionNodes}</View>;\n  }\n\n  return (\n    <View style={{margin: 20}}>\n      <RadioButtons\n        options={ options }\n        onSelection={ setSelectedOption.bind(this) }\n        selectedOption={this.state.selectedOption }\n        renderOption={ renderOption }\n        renderContainer={ renderContainer }\n      />\n      <Text>Selected option: {this.state.selectedOption || 'none'}</Text>\n    </View>);\n}\n\n```\n\nWill render this\n\n![Example](./images/example.gif)\n\n## Props\n\n* `options - []` mandatory array of anything, will be passed to `renderOption`\n* `onSelection - function(selectedOption, selectedIndex){}` option selection callback\n* `selectedIndex - index` the  initially selected index, optional.\n* `selectedOption - option` the initially selected option, optional\n* `renderOption - function(option, selected, onSelect, index)` should return an option node, default generate `<Text>` nodes and adds `{fontWeight:'bold'}` to the selected option.\n* `renderContainer - function(optionsNodes)` must render the container, default is RadioButtons.renderVerticalContainer (see below)\n* `optionStyle` - optional styles to be applied to the `<Text>` elements of the options themselves.\n* `optionContainerStyle` - optional styles to be applied to the the `<View>` that contain the options.\n* `testOptionEqual- function(selectedOption, currentOption){}` optional compares and returns bool.\n\n### Full JavaScript SegmentedControls clone\n\nThis library comes with a clone of the native `SegmentedControls`, based on `RadioButtons`.\n\n```jsx\nimport { SegmentedControls } from 'react-native-radio-buttons'\n\n// ...\n\n<SegmentedControls\n  options={ options }\n  onSelection={ setSelectedOption.bind(this) }\n  selectedOption={ this.state.selectedOption }\n/>\n```\n\nYou override all the defaults through the props.\n\n```jsx\n<SegmentedControls\n  tint={'#f80046'}\n  selectedTint= {'white'}\n  backTint= {'#1e2126'}\n  options={ options }\n  allowFontScaling={ false } // default: true\n  onSelection={ setSelectedOption.bind(this) }\n  selectedOption={ this.state.selectedOption }\n  optionStyle={{fontFamily: 'AvenirNext-Medium'}}\n  optionContainerStyle={{flex: 1}}\n/>\n```\n\nHere is the list of the props you might override:\n\n```jsx\nconst IOS_BLUE = '#007AFF';\nconst IOS_WHITE = '#ffffff';\n\nconst DEFAULTS = {\n  direction: 'row',\n\n  tint: IOS_BLUE,\n  backTint: IOS_WHITE,\n\n  paddingTop: 5,\n  paddingBottom: 5,\n  textAlign: 'center',\n\n  selectedTint: IOS_WHITE,\n  selectedBackgroundColor: IOS_WHITE,\n\n  separatorTint: IOS_BLUE,\n  separatorWidth: 1,\n\n  containerBorderTint: IOS_BLUE,\n  containerBorderWidth: 1,\n  containerBorderRadius: 5,\n\n}\n```\n\nYou can also specify `containerStyle`, `optionContainerStyle`, and `optionStyle` to use any style you want:\n\n* `containerStyle` - optional styles to be applied to the outermost `<View>` component.\n* `optionStyle` - optional styles to be applied to the `<Text>` elements of the options themselves.\n* `optionContainerStyle` - optional styles to be applied to the the `<View>` that contain the options.\n\nYou can also specify how to extract the labels from the options through the extractText prop.\n\n```jsx\noptions = [\n  {\n    label: 'Option 1',\n    value: 'opt1'\n  },\n  {\n    label: 'Option 2',\n    value: 'opt2'\n  }\n]\n\n<SegmentedControls\n  options={ options }\n  onSelection={ setSelectedOption.bind(this) }\n  selectedOption={ this.state.selectedOption },\n  extractText={ (option) => option.label }\n/>\n```\n\nIf you decide to declare `options` as an array of objects, do also include a `testOptionEqual` prop for customized equality checking, otherwise changing `selectedOption` programmatically would not update the UI correctly. \n\nWith the above `options`, you'll need `testOptionEqual` to be as follows in order for `selectedOption` to display correctly.\n\n```jsx\n  <SegmentedControls\n    options={ options }\n    onSelection={ setSelectedOption.bind(this) }\n    selectedOption={ this.state.selectedOption }\n    extractText={ (option) => option.label }\n    testOptionEqual={(selectedValue, option) => selectedValue === option.value}\n  />\n```\n\nMoreover, you can even specify the whole `renderOption()` function:\n\n```jsx\n<SegmentedControls\n  // ...\n  renderOption={(option, selected) => {\n    return (\n      // ...render stuff\n    )\n  }}\n}}\n```\n\n## Helpers\n**RadioButtons.renderVerticalContainer;**\n\nA super simple `renderContainer` function that generates a <View> with `{flexDirection: \"column\"}`. It is used as default `renderContainer` if you don't specify it.\n\nUsage:\n\n```jsx\n<RadioButtons\n  options={ options }\n  onSelection={ setSelectedOption }\n  renderContainer={RadioButtons.renderVerticalContainer}\n/>\n```\n\n**RadioButtons.renderHorizontalContainer;**\n\nAnother super simple `renderContainer` function that generates a <View> with `{flexDirection: \"row\"}`\n\nUsage:\n\n```jsx\n<RadioButtons\n  options={ options }\n  onSelection={ setSelectedOption }\n  renderContainer={RadioButtons.renderHorizontalContainer}\n/>\n```\n\n**RadioButtons.getViewContainerRenderer(viewContainerStyle);**\n\nAn helper that generates a simple `<View>` with the provided style.\n\nUsage:\n\n```jsx\n<RadioButtons\n  options={ options }\n  onSelection={ setSelectedOption }\n  renderContainer={RadioButtons.getViewContainerRenderer({\n    backgroundColor: '#f80046',\n    flexDirection: 'row',\n    justifyContent: 'space-around',\n  })}\n/>\n```\n\n**RadioButtons.getTextOptionRenderer(normalStyle, selectedStyle, extractText);**\n\nAn helper that generates `<Text>` options wrapped in `<TouchableWithoutFeedback>`.\n`normalStyle` and `selectedStyle` will be applied to the <Text> nodes, depending on state. `extractText(options)` can be specified.\n\n\nUsage:\n\n```jsx\nconst normalStyle = {\n  color: 'white'\n};\n\nconst selectedStyle = {\n  color: '#f80046',\n  fontWeight: 'bold'\n};\n\nconst extractText = (option) => option.label;\n\n<RadioButtons\n  options={ options }\n  onSelection={ setSelectedOption }\n  renderOptions={RadioButtons.getTextOptionRenderer(normalStyle, selectedStyle, extractText)}\n/>\n```\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ArnaudRinquin/react-native-radio-buttons.git"
+  },
+  "scripts": {
+    "demo": "cd examples && npm i && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}
